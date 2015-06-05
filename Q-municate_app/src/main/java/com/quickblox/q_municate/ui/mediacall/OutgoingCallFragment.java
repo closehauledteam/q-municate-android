@@ -94,6 +94,7 @@ public abstract class OutgoingCallFragment extends BaseFragment implements View.
 
         stopСallButton = (ImageButton) rootView.findViewById(R.id.stopСallButton);
         stopСallButton.setOnClickListener(this);
+        stopСallButton.setActivated(false);
 
         muteMicrophoneButton = (ToggleButton) rootView.findViewById(R.id.muteMicrophoneButton);
         muteMicrophoneButton.setOnClickListener(this);
@@ -117,10 +118,18 @@ public abstract class OutgoingCallFragment extends BaseFragment implements View.
     @Override
     public void onStartConnectToUser(QBRTCSession qbrtcSession, Integer integer) {
         ((CallActivity) getActivity()).cancelPlayer();                   // надо пересмотреть
+//        stopСallButton.setActivated(true);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                stopСallButton.setActivated(true);
+            }
+        });
     }
 
     @Override
     public void onConnectedToUser(QBRTCSession qbrtcSession, Integer integer) {
+//        stopСallButton.setActivated(true);
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -255,7 +264,7 @@ public abstract class OutgoingCallFragment extends BaseFragment implements View.
         setRetainInstance(true);
 
         Log.d(CALL_INTEGRATION, "OutgoingCallFragment. onCreate");
-        QBRTCClient.getInstance().addConnectionCallbacksListener(this);
+//        QBRTCClient.getInstance().addConnectionCallbacksListener(this);
     }
 
     @Override
@@ -264,7 +273,7 @@ public abstract class OutgoingCallFragment extends BaseFragment implements View.
         Log.d(TAG, "onCreateView()");
         Log.d(CALL_INTEGRATION, "OutgoingCallFragment. onCreateView ");
         View rootView = inflater.inflate(getContentView(), container, false);
-        rootView.findViewById(R.id.stopСallButton).setOnClickListener(this);
+//        rootView.findViewById(R.id.stopСallButton).setOnClickListener(this);
 
         initChatData();
         initUI(rootView);
@@ -298,6 +307,20 @@ public abstract class OutgoingCallFragment extends BaseFragment implements View.
                 stopСallButton.setEnabled(false);
                 stopСallButton.setActivated(false);
                 stopCall();
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        stopCall();
+//                        setActionButtonsEnability(false);
+//                        stopСallButton.setEnabled(false);
+//                        stopСallButton.setActivated(false);
+////                        setActionButtonsEnability(false);
+////                        stopСallButton.setEnabled(false);
+////                        stopСallButton.setActivated(false);
+////                        stopCall();
+//                    }
+//                });
+
                 Log.d("Track", "Call is stopped");
                 break;
             case R.id.muteMicrophoneButton:
@@ -435,7 +458,7 @@ public abstract class OutgoingCallFragment extends BaseFragment implements View.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        QBRTCClient.getInstance().removeConnectionCallbacksListener(OutgoingCallFragment.this);
+//        QBRTCClient.getInstance().removeConnectionCallbacksListener(OutgoingCallFragment.this);
 
     }
 }

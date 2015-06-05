@@ -101,10 +101,10 @@ public class CallActivity extends BaseLogeableActivity implements IncomingCallFr
 
     @Override
     public void acceptCallClick() {
+        Log.d("CALL_INTEGRATION", "CallActivity. acceptCall() executed");
         cancelPlayer();
         showOutgoingFragment();
         if (isCleintReadyAccept) {
-            Log.d("CALL_INTEGRATION", "CallActivity. acceptCall() executed");
             Runnable acceptTask = callTasksMap.get(ACCEPT_CALL_TASK);
             executeCallTask(acceptTask);
         } else {
@@ -114,9 +114,9 @@ public class CallActivity extends BaseLogeableActivity implements IncomingCallFr
 
     @Override
     public void rejectCallClick() {
+        Log.d("CALL_INTEGRATION", "CallActivity. rejectCall() executed");
+        cancelPlayer();
         if (isCleintReadyAccept) {
-            cancelPlayer();
-            Log.d("CALL_INTEGRATION", "CallActivity. rejectCall() executed");
             Runnable rejectTask = callTasksMap.get(REJECT_CALL_TASK);
             executeCallTask(rejectTask);
         } else {
@@ -171,8 +171,12 @@ public class CallActivity extends BaseLogeableActivity implements IncomingCallFr
     @Override
     public void hungUpClick() {
         Log.d("CALL_INTEGRATION", "CallActivity. hungUp() executed");
-        Runnable hungUpTask = callTasksMap.get(HANG_UP_CALL_TASK);
-        executeCallTask(hungUpTask);
+        if (isCleintReadyAccept) {
+            Runnable hungUpTask = callTasksMap.get(HANG_UP_CALL_TASK);
+            executeCallTask(hungUpTask);
+        } else {
+            waitingTasksMap.put(HANG_UP_CALL_TASK, callTasksMap.get(HANG_UP_CALL_TASK));
+        }
     }
 
     @Override
@@ -689,7 +693,9 @@ public class CallActivity extends BaseLogeableActivity implements IncomingCallFr
             @Override
             public void run() {
                 Log.d("CALL_INTEGRATION", "CallActivity. initHangUpCallTask lunched");
-                videoChatHelper.hangUpCall(userInfo);
+                if(videoChatHelper.getVideoChatHelperState() == QBVideoChatHelper.VideoHelperStates.RTC_CLIENT_PROCESS_CALLS) {
+                    videoChatHelper.hangUpCall(userInfo);
+                }
             }
         };
     }
