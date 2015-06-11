@@ -623,7 +623,7 @@ public abstract class BaseDialogActivity extends BaseFragmentActivity implements
             error = true;
         } catch (IllegalStateException e) {
             ErrorUtils.showError(this, this.getString(
-                    com.quickblox.q_municate_core.R.string.dlg_not_joined_room));
+                    com.quickblox.q_municate.R.string.dlg_not_joined_room));
             error = true;
         }
 

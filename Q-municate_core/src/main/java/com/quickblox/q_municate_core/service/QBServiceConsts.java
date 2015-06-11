@@ -140,7 +140,6 @@ public class QBServiceConsts {
     public static final String UPDATE_GROUP_DIALOG_FAIL_ACTION = "update_group_dialog_fail_action";
     public static final String DELETE_DIALOG_SUCCESS_ACTION = "delete_dialog_success_action";
     public static final String DELETE_DIALOG_FAIL_ACTION = "delete_dialog_fail_action";
-
     public static final String EXTRA_ATTACH_FILE = "attach_file";
     public static final String EXTRA_CHAT_MESSAGE = "chat_message";
     public static final String EXTRA_ROOM_JID = "room_jid_id";
@@ -194,7 +193,6 @@ public class QBServiceConsts {
     public static final String EXTRA_CALL_ACTIVITY = "call_activity";
     public static final String EXTRA_PAGE = "load_elements";
     public static final String EXTRA_SKIP_ITEMS = "skip_items";
-
     public static final String UPDATE_DIALOG = "update_dialog";
     public static final String UPDATE_DIALOG_DETAILS = "update_dialog_details";
     public static final String TYPING_MESSAGE = "typing_message";
@@ -208,4 +206,5 @@ public class QBServiceConsts {
     public static final String AUTH_ACTION_TYPE = "authorize_type";
     public static final int AUTH_TYPE_REGISTRATION = 1;
     public static final int AUTH_TYPE_LOGIN = 2;
+    public static final String LOCATION_COMMAND = "action_location_command";
 }

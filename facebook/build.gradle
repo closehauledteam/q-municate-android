@@ -1,9 +1,11 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 dependencies {
-    compile 'com.android.support:support-v4:13.0.+'
+    compile 'com.android.support:support-v13:21.0.3'
     compile files('libs/bolts.jar')
-    compile "com.google.android.gms:play-services:${rootProject.googlePlayServicesVersion}"
+    compile "com.google.android.gms:play-services-base:${rootProject.googlePlayServicesVersion}"
+    compile "com.google.android.gms:play-services-maps:${rootProject.googlePlayServicesVersion}"
+    compile "com.google.android.gms:play-services-location:${rootProject.googlePlayServicesVersion}"
 }
 
 android {

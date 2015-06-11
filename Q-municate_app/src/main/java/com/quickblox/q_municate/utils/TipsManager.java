@@ -66,6 +66,7 @@ public class TipsManager {
         final Crouton crouton = Crouton.make(activity, tipView);
         crouton.setConfiguration(CONFIGURATION_INFINITE);
         crouton.show();
+
         tipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

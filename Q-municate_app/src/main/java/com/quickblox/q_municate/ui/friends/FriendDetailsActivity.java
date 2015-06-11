@@ -151,15 +151,15 @@ public class FriendDetailsActivity extends BaseLogeableActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.action_delete:
-                showRemoveUserDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int i = item.getItemId();
+        if (i == android.R.id.home) {
+            finish();
+            return true;
+        } else if (i == R.id.action_delete) {
+            showRemoveUserDialog();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

@@ -180,21 +180,21 @@ public class GroupDialogDetailsActivity extends BaseLogeableActivity implements 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                navigateToParent();
-                return true;
-            case R.id.action_add:
-                if (!loadedDialogInfo) {
-                    DialogUtils.showLong(GroupDialogDetailsActivity.this, getResources().getString(
-                            R.string.gdd_group_info_is_loading));
-                } else {
-                    startAddFriendsActivity();
-                }
-                return true;
-            case R.id.action_leave:
-                showLeaveGroupDialog();
-                return true;
+        int i = item.getItemId();
+        if (i == android.R.id.home) {
+            navigateToParent();
+            return true;
+        } else if (i == R.id.action_add) {
+            if (!loadedDialogInfo) {
+                DialogUtils.showLong(GroupDialogDetailsActivity.this, getResources().getString(
+                        R.string.gdd_group_info_is_loading));
+            } else {
+                startAddFriendsActivity();
+            }
+            return true;
+        } else if (i == R.id.action_leave) {
+            showLeaveGroupDialog();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
